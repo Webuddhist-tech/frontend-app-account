@@ -10,9 +10,19 @@ const siteLanguageList = [
     released: true,
   },
   {
+    code: 'bo',
+    name: 'བོད་ཡིག (Tibetan)',
+    released: true,
+  },
+  {
     code: 'ca',
     name: 'Català',
     released: false,
+  },
+  {
+    code: 'cs',
+    name: 'Čeština (Czech)',
+    released: true,
   },
   {
     code: 'es-419',
@@ -37,7 +47,7 @@ const siteLanguageList = [
   {
     code: 'id',
     name: 'Bahasa Indonesia',
-    released: false,
+    released: true,
   },
   {
     code: 'ko-kr',
@@ -68,6 +78,11 @@ const siteLanguageList = [
     code: 'uk',
     name: 'Українська',
     released: false,
+  },
+  {
+    code: 'vi',
+    name: 'Tiếng Việt',
+    released: true,
   },
   {
     code: 'zh-cn',
