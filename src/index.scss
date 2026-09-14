@@ -3,13 +3,9 @@
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
 
-@import "~@edx/brand/paragon/fonts";
-@import "~@edx/brand/paragon/overrides";
-@import "~@edx/brand/paragon/footer";
-
-@import "~@edx/brand/paragon/header";
 @import "~@edx/frontend-component-header/dist/index";
 @import "~@edx/frontend-component-footer/dist/footer";
+@import "~@edx/brand/paragon/account";
 
 @import "./account-settings/style";
 @import "./id-verification/id-verification";
