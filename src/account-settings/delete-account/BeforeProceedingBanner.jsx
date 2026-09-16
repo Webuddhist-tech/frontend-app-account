@@ -17,7 +17,7 @@ const BeforeProceedingBanner = (props) => {
 
   return (
     <Alert
-      className="alert-warning mt-n2"
+      className="alert-warning"
       icon={<FontAwesomeIcon className="mr-2" icon={faExclamationTriangle} />}
     >
       <FormattedMessage

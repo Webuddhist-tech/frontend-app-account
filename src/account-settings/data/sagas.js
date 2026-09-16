@@ -46,6 +46,8 @@ import {
   getTimeZones,
   getVerifiedNameHistory,
 } from './service';
+import { refreshAuthenticatedUser } from './utils';
+import { FIELD_LABELS } from './constants';
 
 export function* handleFetchSettings() {
   try {
@@ -107,6 +109,10 @@ export function* handleSaveSettings(action) {
     if (savedValues.country) { yield put(fetchTimeZones(savedValues.country)); }
     yield delay(1000);
     yield put(closeForm(action.payload.formId));
+    // commitData is replaced wholesale by extendedProfile above, and extended profile fields
+    // never include name, so checking commitData itself (rather than formId) stays correct even
+    // if a future refactor ever routes the name field through the extendedProfile path.
+    if (FIELD_LABELS.NAME in commitData) { yield call(refreshAuthenticatedUser); }
   } catch (e) {
     if (e.fieldErrors) {
       if (e.fieldErrors.name?.includes('verification')) {
@@ -132,6 +138,10 @@ export function* handleSaveMultipleSettings(action) {
       const commitData = { [formId]: commitValues };
       const savedSettings = yield call(patchSettings, username, commitData, userId);
       yield put(saveSettingsSuccess(savedSettings, commitData));
+      // Fire as soon as this specific patch lands, not after the whole batch: a later item can
+      // still fail and jump to the catch below, but the name change already persisted and other
+      // MFEs still need the refreshed JWT.
+      if (formId === FIELD_LABELS.NAME) { yield call(refreshAuthenticatedUser); }
     }
     yield put(saveMultipleSettingsSuccess(action));
     if (form) {

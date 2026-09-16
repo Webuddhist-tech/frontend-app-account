@@ -5,10 +5,10 @@ import {
   Button, StatefulButton, Form, Tooltip, OverlayTrigger,
 } from '@openedx/paragon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
-import Alert from './Alert';
 import SwitchContent from './SwitchContent';
+import FieldActionButton from './FieldActionButton';
 import messages from './AccountSettingsPage.messages';
 
 import {
@@ -55,20 +55,26 @@ const EmailField = (props) => {
     onCancel(name);
   };
 
+  const hasSavedValue = Boolean(value || confirmationValue);
+  const actionLabelMessageKey = hasSavedValue
+    ? 'account.settings.editable.field.action.edit'
+    : 'account.settings.editable.field.action.add';
+  const actionVariant = hasSavedValue ? 'edit' : 'add';
+
   const renderConfirmationMessage = () => {
     if (!confirmationMessageDefinition || !confirmationValue) {
       return null;
     }
     return (
-      <Alert
-        className="alert-warning mt-n2"
-        icon={<FontAwesomeIcon className="mr-2 h6" icon={faExclamationTriangle} />}
-      >
-        <h6 aria-level="3">
-          {intl.formatMessage(messages['account.settings.email.field.confirmation.header'])}
-        </h6>
-        {intl.formatMessage(confirmationMessageDefinition, { value: confirmationValue })}
-      </Alert>
+      <div className="ac-reset-note ac-email-confirmation">
+        <FontAwesomeIcon className="ac-reset-note-icon" icon={faExclamationTriangle} aria-hidden="true" />
+        <div>
+          <h6 className="ac-email-confirmation-title" aria-level="3">
+            {intl.formatMessage(messages['account.settings.email.field.confirmation.header'])}
+          </h6>
+          {intl.formatMessage(confirmationMessageDefinition, { value: confirmationValue })}
+        </div>
+      </div>
     );
   };
 
@@ -85,12 +91,9 @@ const EmailField = (props) => {
     </span>
   );
 
-  const renderEmptyLabel = () => {
-    if (isEditable) {
-      return <Button variant="link" onClick={handleEdit} className="p-0">{emptyLabel}</Button>;
-    }
-    return <span className="text-muted">{emptyLabel}</span>;
-  };
+  const renderEmptyLabel = () => (
+    <span className="ac-empty">{emptyLabel}</span>
+  );
 
   const renderValue = () => {
     if (confirmationValue) {
@@ -104,32 +107,33 @@ const EmailField = (props) => {
       expression={isEditing ? 'editing' : 'default'}
       cases={{
         editing: (
-          <form onSubmit={handleSubmit}>
-            <Form.Group
-              controlId={id}
-              isInvalid={error != null}
-            >
-              <Form.Label className="h6 d-block" htmlFor={id}>{label}</Form.Label>
-              <Form.Control
-                data-hj-suppress
-                name={name}
-                id={id}
-                type="email"
-                value={value}
-                onChange={handleChange}
-              />
-              {!!helpText && <Form.Text>{helpText}</Form.Text>}
-              {error != null && <Form.Control.Feedback hasIcon={false}>{error}</Form.Control.Feedback>}
-            </Form.Group>
-            <p>
-              <StatefulButton
-                type="submit"
-                className="mr-2"
-                state={saveState}
-                labels={{
-                  default: intl.formatMessage(messages['account.settings.editable.field.action.save']),
-                }}
-                onClick={(e) => {
+          <div className="ac-row ac-row-editing">
+            <form className="ac-row-body ac-form" onSubmit={handleSubmit}>
+              <Form.Group
+                controlId={id}
+                isInvalid={error != null}
+              >
+                <Form.Label className="ac-label d-block" htmlFor={id}>{label}</Form.Label>
+                <Form.Control
+                  data-hj-suppress
+                  name={name}
+                  id={id}
+                  type="email"
+                  value={value}
+                  onChange={handleChange}
+                />
+                {!!helpText && <Form.Text>{helpText}</Form.Text>}
+                {error != null && <Form.Control.Feedback hasIcon={false}>{error}</Form.Control.Feedback>}
+              </Form.Group>
+              <div className="ac-form-actions">
+                <StatefulButton
+                  type="submit"
+                  className="mr-2"
+                  state={saveState}
+                  labels={{
+                    default: intl.formatMessage(messages['account.settings.editable.field.action.save']),
+                  }}
+                  onClick={(e) => {
                   // Swallow clicks if the state is pending.
                   // We do this instead of disabling the button to prevent
                   // it from losing focus (disabled elements cannot have focus).
@@ -137,41 +141,46 @@ const EmailField = (props) => {
                   // Swallowing the onSubmit event on the form would be better, but
                   // we would have to add that logic for every field given our
                   // current structure of the application.
-                  if (saveState === 'pending') { e.preventDefault(); }
-                }}
-                disabledStates={[]}
-              />
-              <Button
-                variant="outline-primary"
-                onClick={handleCancel}
-              >
-                {intl.formatMessage(messages['account.settings.editable.field.action.cancel'])}
-              </Button>
-            </p>
-          </form>
+                    if (saveState === 'pending') { e.preventDefault(); }
+                  }}
+                  disabledStates={[]}
+                />
+                <Button
+                  variant="outline-primary"
+                  onClick={handleCancel}
+                >
+                  {intl.formatMessage(messages['account.settings.editable.field.action.cancel'])}
+                </Button>
+              </div>
+            </form>
+          </div>
         ),
         default: (
-          <div className="form-group">
-            <div className="d-flex align-items-start">
-              <h6 aria-level="3">{label}</h6>
+          <div className="form-group ac-row">
+            <div className="ac-row-body">
+              <h6 className="ac-label" aria-level="3">{label}</h6>
+              <OverlayTrigger
+                placement="top"
+                overlay={(
+                  <Tooltip id={`tooltip-${name}`} variant="light" className="d-sm-none">
+                    {renderValue()}
+                  </Tooltip>
+                )}
+              >
+                <p data-hj-suppress className="ac-value text-truncate">{renderValue()}</p>
+              </OverlayTrigger>
+              {renderConfirmationMessage() || <p className="ac-help">{helpText}</p>}
+            </div>
+            <div className="ac-row-action">
               {isEditable ? (
-                <Button variant="link" onClick={handleEdit} className="ml-3">
-                  <FontAwesomeIcon className="mr-1" icon={faPencilAlt} />
-                  {intl.formatMessage(messages['account.settings.editable.field.action.edit'])}
-                </Button>
+                <FieldActionButton
+                  label={intl.formatMessage(messages[actionLabelMessageKey])}
+                  onClick={handleEdit}
+                  variant={actionVariant}
+                  clicked={actionVariant}
+                />
               ) : null}
             </div>
-            <OverlayTrigger
-              placement="top"
-              overlay={(
-                <Tooltip id={`tooltip-${name}`} variant="light" className="d-sm-none">
-                  {renderValue()}
-                </Tooltip>
-              )}
-            >
-              <p data-hj-suppress className="text-truncate">{renderValue()}</p>
-            </OverlayTrigger>
-            {renderConfirmationMessage() || <p className="small text-muted mt-n2">{helpText}</p>}
           </div>
         ),
       }}

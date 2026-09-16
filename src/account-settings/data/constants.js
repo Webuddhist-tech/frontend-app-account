@@ -134,4 +134,5 @@ export function getStatesList(country) {
 
 export const FIELD_LABELS = {
   COUNTRY: 'country',
+  NAME: 'name',
 };

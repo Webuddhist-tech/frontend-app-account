@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { AppContext } from '@edx/frontend-platform/react';
 import {
-  render, screen, fireEvent,
+  render, screen, fireEvent, within,
 } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { IntlProvider, injectIntl } from '@edx/frontend-platform/i18n';
@@ -140,8 +140,8 @@ describe('AccountSettingsPage', () => {
   it('renders AccountSettingsPage correctly with editing enabled', async () => {
     const { getByText, rerender, getByLabelText } = render(reduxWrapper(<IntlAccountSettingsPage {...props} />));
 
-    const workExperienceText = getByText('Work Experience');
-    const workExperienceEditButton = workExperienceText.parentElement.querySelector('button');
+    const workExperienceRow = getByText('Work Experience').closest('.ac-row');
+    const workExperienceEditButton = within(workExperienceRow).getByRole('button');
 
     expect(workExperienceEditButton).toBeInTheDocument();
 
@@ -187,9 +187,9 @@ describe('AccountSettingsPage', () => {
   it('renders Social Media section with correct field values', () => {
     render(reduxWrapper(<AccountSettingsPage {...props} />));
 
-    expect(screen.getByText('https://linkedin.com/in/testuser')).toBeInTheDocument();
-    expect(screen.getByText('Add Facebook profile')).toBeInTheDocument();
-    expect(screen.getByText('Add Twitter profile')).toBeInTheDocument();
+    const socialSection = document.getElementById('social-media');
+    expect(within(socialSection).getByText('https://linkedin.com/in/testuser')).toBeInTheDocument();
+    expect(within(socialSection).getAllByText('Not linked')).toHaveLength(2);
   });
 
   it('renders Site Preferences section with correct field values', () => {

@@ -6,8 +6,6 @@ import { Hyperlink } from '@openedx/paragon';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
-import Alert from '../Alert';
-
 const ConfirmationAlert = (props) => {
   const { email } = props;
 
@@ -24,20 +22,20 @@ const ConfirmationAlert = (props) => {
   );
 
   return (
-    <Alert
-      className="alert-warning mt-n2"
-      icon={<FontAwesomeIcon className="mr-2" icon={faExclamationTriangle} />}
-    >
-      <FormattedMessage
-        id="account.settings.editable.field.password.reset.button.confirmation"
-        defaultMessage="We've sent a message to {email}. Click the link in the message to reset your password. Didn't receive the message? Contact {technicalSupportLink}."
-        description="The password reset button in account settings"
-        values={{
-          email,
-          technicalSupportLink,
-        }}
-      />
-    </Alert>
+    <div className="ac-reset-note">
+      <FontAwesomeIcon className="ac-reset-note-icon" icon={faExclamationTriangle} aria-hidden="true" />
+      <p>
+        <FormattedMessage
+          id="account.settings.editable.field.password.reset.button.confirmation"
+          defaultMessage="We've sent a message to {email}. Click the link in the message to reset your password. Didn't receive the message? Contact {technicalSupportLink}."
+          description="The password reset button in account settings"
+          values={{
+            email,
+            technicalSupportLink,
+          }}
+        />
+      </p>
+    </div>
   );
 };
 

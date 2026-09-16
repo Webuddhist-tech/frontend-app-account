@@ -6,6 +6,16 @@ const messages = defineMessages({
     defaultMessage: 'Account Settings',
     description: 'The page heading for the account settings page.',
   },
+  'account.settings.page.eyebrow': {
+    id: 'account.settings.page.eyebrow',
+    defaultMessage: 'Your account',
+    description: 'Short eyebrow text above the account settings page heading.',
+  },
+  'account.settings.field.permanent': {
+    id: 'account.settings.field.permanent',
+    defaultMessage: 'Permanent',
+    description: 'Badge indicating that an account field cannot be changed.',
+  },
   'account.settings.loading.message': {
     id: 'account.settings.loading.message',
     defaultMessage: 'Loading...',
@@ -33,12 +43,12 @@ const messages = defineMessages({
   },
   'account.settings.section.account.information': {
     id: 'account.settings.section.account.information',
-    defaultMessage: 'Account Information',
+    defaultMessage: 'Account information',
     description: 'The basic account information section heading.',
   },
   'account.settings.section.account.information.description': {
     id: 'account.settings.section.account.information.description',
-    defaultMessage: 'These settings include basic information about your account.',
+    defaultMessage: 'Basic information about your account and how you sign in.',
     description: 'The basic account information section heading description.',
   },
   'account.settings.section.profile.information': {
@@ -46,19 +56,29 @@ const messages = defineMessages({
     defaultMessage: 'Profile Information',
     description: 'The profile information section heading.',
   },
+  'account.settings.section.profile.information.description': {
+    id: 'account.settings.section.profile.information.description',
+    defaultMessage: 'Optional details that help teachers understand who is in the room.',
+    description: 'The profile information section heading description.',
+  },
   'account.settings.section.site.preferences': {
     id: 'account.settings.section.site.preferences',
-    defaultMessage: 'Site Preferences',
+    defaultMessage: 'Site preferences',
     description: 'The site preferences section heading.',
+  },
+  'account.settings.section.site.preferences.description': {
+    id: 'account.settings.section.site.preferences.description',
+    defaultMessage: 'How the platform is displayed for you.',
+    description: 'The site preferences section heading description.',
   },
   'account.settings.section.linked.accounts': {
     id: 'account.settings.section.linked.accounts',
-    defaultMessage: 'Linked Accounts',
+    defaultMessage: 'Linked accounts',
     description: 'The linked accounts section heading.',
   },
   'account.settings.section.linked.accounts.description': {
     id: 'account.settings.section.linked.accounts.description',
-    defaultMessage: 'You can link your identity accounts to simplify signing in to {siteName}.',
+    defaultMessage: 'Sign in faster by linking an account you already use.',
     description: 'The linked accounts section heading description.',
   },
   'account.settings.field.username': {
@@ -68,7 +88,7 @@ const messages = defineMessages({
   },
   'account.settings.field.username.help.text': {
     id: 'account.settings.field.username.help.text',
-    defaultMessage: 'The name that identifies you on {siteName}. You cannot change your username.',
+    defaultMessage: 'The name that identifies you on {siteName}. This cannot be changed.',
     description: 'Help text for the account settings username field.',
   },
   'account.settings.field.full.name': {
@@ -83,7 +103,7 @@ const messages = defineMessages({
   },
   'account.settings.field.full.name.help.text': {
     id: 'account.settings.field.full.name.help.text',
-    defaultMessage: 'The name that is used for ID verification and that appears on your certificates.',
+    defaultMessage: 'Used for ID verification and printed on your certificates.',
     description: 'Help text for the account settings name field.',
   },
   'account.settings.field.full.name.help.text.default': {
@@ -343,7 +363,7 @@ const messages = defineMessages({
   },
   'account.settings.field.site.language.help.text': {
     id: 'account.settings.field.site.language.help.text',
-    defaultMessage: 'The language used throughout this site. This site is currently available in a limited number of languages.',
+    defaultMessage: 'Menus, buttons, and system messages. Course content keeps its own language.',
     description: 'Help text for the site language field.',
   },
   'account.settings.field.education': {
@@ -465,7 +485,7 @@ const messages = defineMessages({
   },
   'account.settings.field.time.zone.description': {
     id: 'account.settings.field.time.zone.description',
-    defaultMessage: 'Select the time zone for displaying course dates. If you do not specify a time zone, course dates, including assignment deadlines, will be displayed in your browser’s local time zone.',
+    defaultMessage: 'Used for live session times and assignment deadlines.',
     description: 'Description for time zone settings field.',
   },
   'account.settings.field.time.zone.default': {
@@ -486,12 +506,12 @@ const messages = defineMessages({
 
   'account.settings.section.social.media': {
     id: 'account.settings.section.social.media',
-    defaultMessage: 'Social Media Links',
+    defaultMessage: 'Social media links',
     description: 'Section header for social media links settings',
   },
   'account.settings.section.social.media.description': {
     id: 'account.settings.section.social.media.description',
-    defaultMessage: 'Optionally, link your personal accounts to the social media icons on your {siteName} profile.',
+    defaultMessage: 'Shown on your public profile. Leave blank to keep them private.',
     description: 'Section subheader for social media links settings',
   },
   'account.settings.field.social.platform.name.linkedin': {
@@ -501,7 +521,7 @@ const messages = defineMessages({
   },
   'account.settings.field.social.platform.name.linkedin.empty': {
     id: 'account.settings.field.social.platform.name.linkedin.empty',
-    defaultMessage: 'Add LinkedIn profile',
+    defaultMessage: 'Not linked',
     description: 'Placeholder for an empty LinkedIn field',
   },
   'account.settings.jump.nav.delete.account': {
@@ -511,12 +531,12 @@ const messages = defineMessages({
   },
   'account.settings.field.social.platform.name.twitter': {
     id: 'account.settings.field.social.platform.name.twitter',
-    defaultMessage: 'Twitter',
+    defaultMessage: 'X (Twitter)',
     description: 'Label for Twitter',
   },
   'account.settings.field.social.platform.name.twitter.empty': {
     id: 'account.settings.field.social.platform.name.twitter.empty',
-    defaultMessage: 'Add Twitter profile',
+    defaultMessage: 'Not linked',
     description: 'Placeholder for an empty Twitter field',
   },
 
@@ -527,7 +547,7 @@ const messages = defineMessages({
   },
   'account.settings.field.social.platform.name.facebook.empty': {
     id: 'account.settings.field.social.platform.name.facebook.empty',
-    defaultMessage: 'Add Facebook profile',
+    defaultMessage: 'Not linked',
     description: 'Placeholder for an empty Facebook field',
   },
   'account.settings.editable.field.action.save': {
@@ -544,6 +564,11 @@ const messages = defineMessages({
     id: 'account.settings.editable.field.action.edit',
     defaultMessage: 'Edit',
     description: 'The edit button on an editable field',
+  },
+  'account.settings.editable.field.action.add': {
+    id: 'account.settings.editable.field.action.add',
+    defaultMessage: 'Add',
+    description: 'The add button on an editable field when no value is set',
   },
   'account.settings.static.field.empty': {
     id: 'account.settings.static.field.empty',

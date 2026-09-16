@@ -41,7 +41,7 @@ exports[`ConfirmationModal should match empty password confirmation modal snapsh
       />
       <div
         aria-label="Are you sure?"
-        className="pgn__modal pgn__modal-md pgn__modal-default pgn__modal-visible-overflow pgn__alert-modal"
+        className="pgn__modal pgn__modal-md pgn__modal-default pgn__modal-visible-overflow pgn__alert-modal ac-delete-modal"
         role="dialog"
       >
         <div
@@ -61,10 +61,10 @@ exports[`ConfirmationModal should match empty password confirmation modal snapsh
             className="pgn__modal-body-content"
           >
             <div
-              className="p-3"
+              className="ac-modal-body"
             >
               <div
-                className="alert d-flex align-items-start alert-danger mt-n2"
+                className="alert d-flex align-items-start alert-danger ac-modal-error"
               >
                 <div>
                   <svg
@@ -89,39 +89,32 @@ exports[`ConfirmationModal should match empty password confirmation modal snapsh
                   <h6>
                     A password is required
                   </h6>
-                  <p
-                    className="text-danger"
-                  >
-                    Sorry, there was an error trying to process your request. Please try again later.
-                  </p>
                 </div>
               </div>
               <div
-                className="alert d-flex align-items-start alert-warning mt-n2"
+                className="ac-modal-note"
               >
-                <div>
-                  <svg
-                    aria-hidden="true"
-                    className="svg-inline--fa fa-triangle-exclamation mr-2"
-                    data-icon="triangle-exclamation"
-                    data-prefix="fas"
-                    focusable="false"
-                    role="img"
+                <svg
+                  aria-hidden="true"
+                  className="svg-inline--fa fa-triangle-exclamation ac-modal-note-icon"
+                  data-icon="triangle-exclamation"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  style={{}}
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    fill="currentColor"
                     style={{}}
-                    viewBox="0 0 512 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
-                      fill="currentColor"
-                      style={{}}
-                    />
-                  </svg>
-                </div>
+                  />
+                </svg>
                 <div>
-                  <h6>
+                  <p>
                     You have selected "Delete My Account". Deletion of your account and personal data is permanent and cannot be undone. localhost will not be able to recover your account or the data that is deleted.
-                  </h6>
+                  </p>
                   <p>
                     If you proceed, you will be unable to use this account to take courses on localhost.
                   </p>
@@ -135,13 +128,13 @@ exports[`ConfirmationModal should match empty password confirmation modal snapsh
                 for="passwordFieldId"
               >
                 <label
-                  className="pgn__form-label d-block"
+                  className="pgn__form-label ac-modal-ask d-block"
                   htmlFor="form-field3"
                 >
                   If you still wish to continue and delete your account, please enter your account password:
                 </label>
                 <div
-                  className="pgn__form-control-decorator-group"
+                  className="pgn__form-control-decorator-group ac-input"
                 >
                   <input
                     aria-describedby="form-field3-5"
@@ -191,10 +184,10 @@ exports[`ConfirmationModal should match empty password confirmation modal snapsh
           className="pgn__modal-footer"
         >
           <div
-            className="pgn__action-row"
+            className="ac-modal-foot pgn__action-row"
           >
             <button
-              className="btn btn-link"
+              className="btn btn-outline-primary"
               disabled={false}
               onClick={[MockFunction]}
               type="button"
@@ -202,7 +195,7 @@ exports[`ConfirmationModal should match empty password confirmation modal snapsh
               Cancel
             </button>
             <button
-              className="btn btn-danger"
+              className="ac-btn-solid-danger btn btn-danger"
               disabled={false}
               onClick={[MockFunction]}
               type="button"
@@ -269,7 +262,7 @@ exports[`ConfirmationModal should match open confirmation modal snapshot 1`] = `
       />
       <div
         aria-label="Are you sure?"
-        className="pgn__modal pgn__modal-md pgn__modal-default pgn__modal-visible-overflow pgn__alert-modal"
+        className="pgn__modal pgn__modal-md pgn__modal-default pgn__modal-visible-overflow pgn__alert-modal ac-delete-modal"
         role="dialog"
       >
         <div
@@ -289,34 +282,32 @@ exports[`ConfirmationModal should match open confirmation modal snapshot 1`] = `
             className="pgn__modal-body-content"
           >
             <div
-              className="p-3"
+              className="ac-modal-body"
             >
               <div
-                className="alert d-flex align-items-start alert-warning mt-n2"
+                className="ac-modal-note"
               >
-                <div>
-                  <svg
-                    aria-hidden="true"
-                    className="svg-inline--fa fa-triangle-exclamation mr-2"
-                    data-icon="triangle-exclamation"
-                    data-prefix="fas"
-                    focusable="false"
-                    role="img"
+                <svg
+                  aria-hidden="true"
+                  className="svg-inline--fa fa-triangle-exclamation ac-modal-note-icon"
+                  data-icon="triangle-exclamation"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  style={{}}
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
+                    fill="currentColor"
                     style={{}}
-                    viewBox="0 0 512 512"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480L40 480c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24l0 112c0 13.3 10.7 24 24 24s24-10.7 24-24l0-112c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"
-                      fill="currentColor"
-                      style={{}}
-                    />
-                  </svg>
-                </div>
+                  />
+                </svg>
                 <div>
-                  <h6>
+                  <p>
                     You have selected "Delete My Account". Deletion of your account and personal data is permanent and cannot be undone. localhost will not be able to recover your account or the data that is deleted.
-                  </h6>
+                  </p>
                   <p>
                     If you proceed, you will be unable to use this account to take courses on localhost.
                   </p>
@@ -330,13 +321,13 @@ exports[`ConfirmationModal should match open confirmation modal snapshot 1`] = `
                 for="passwordFieldId"
               >
                 <label
-                  className="pgn__form-label d-block"
+                  className="pgn__form-label ac-modal-ask d-block"
                   htmlFor="form-field1"
                 >
                   If you still wish to continue and delete your account, please enter your account password:
                 </label>
                 <div
-                  className="pgn__form-control-decorator-group"
+                  className="pgn__form-control-decorator-group ac-input"
                 >
                   <input
                     className="has-value form-control"
@@ -357,10 +348,10 @@ exports[`ConfirmationModal should match open confirmation modal snapshot 1`] = `
           className="pgn__modal-footer"
         >
           <div
-            className="pgn__action-row"
+            className="ac-modal-foot pgn__action-row"
           >
             <button
-              className="btn btn-link"
+              className="btn btn-outline-primary"
               disabled={false}
               onClick={[MockFunction]}
               type="button"
@@ -368,7 +359,7 @@ exports[`ConfirmationModal should match open confirmation modal snapshot 1`] = `
               Cancel
             </button>
             <button
-              className="btn btn-danger"
+              className="ac-btn-solid-danger btn btn-danger"
               disabled={false}
               onClick={[MockFunction]}
               type="button"

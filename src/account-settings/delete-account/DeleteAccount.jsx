@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
-import { Button, Hyperlink } from '@openedx/paragon';
+import { Button } from '@openedx/paragon';
 
 // Actions
 import {
@@ -19,7 +19,6 @@ import messages from './messages';
 
 // Components
 import ConnectedConfirmationModal from './ConfirmationModal';
-import PrintingInstructions from './PrintingInstructions';
 import ConnectedSuccessModal from './SuccessModal';
 import BeforeProceedingBanner from './BeforeProceedingBanner';
 
@@ -72,49 +71,43 @@ export class DeleteAccount extends React.Component {
       : 'account.settings.delete.account.please.activate';
 
     return (
-      <div>
-        <h2 className="section-heading h4 mb-3">
-          {intl.formatMessage(messages['account.settings.delete.account.header'])}
-        </h2>
+      <div className="ac-delete-content">
+        <div className="ac-card-head">
+          <h2 className="section-heading ac-h2">
+            {intl.formatMessage(messages['account.settings.delete.account.header'])}
+          </h2>
+          <p className="ac-card-note">
+            {intl.formatMessage(messages['account.settings.delete.account.subheader'])}
+          </p>
+        </div>
         {
           this.props.canDeleteAccount ? (
-            <>
-              <p>{intl.formatMessage(messages['account.settings.delete.account.subheader'])}</p>
-              <p>
-                {intl.formatMessage(
-                  messages['account.settings.delete.account.text.1'],
-                  { siteName: getConfig().SITE_NAME },
-                )}
-              </p>
-              <p>
+            <div className="ac-delete-body">
+              <p className="ac-help ac-delete-intro">
                 {intl.formatMessage(
                   messages[deleteAccountText2MessageKey],
                   { siteName: getConfig().SITE_NAME },
                 )}
               </p>
-              <p>
-                <PrintingInstructions />
+              <p className="ac-help">
+                {intl.formatMessage(messages['account.settings.delete.account.text.3'])}
               </p>
-              <p className="text-danger h6">
+              <p className="ac-delete-warning">
                 {intl.formatMessage(
                   messages['account.settings.delete.account.text.warning'],
                   { siteName: getConfig().SITE_NAME },
                 )}
               </p>
-              <p>
-                <Hyperlink destination="https://help.edx.org/edxlearner/s/topic/0TOQq0000001UdZOAU/account-basics">
-                  {intl.formatMessage(messages['account.settings.delete.account.text.change.instead'])}
-                </Hyperlink>
-              </p>
-              <p>
+              <div className="ac-row-action ac-delete-action">
                 <Button
-                  variant="outline-danger"
+                  variant="danger"
+                  className="ac-btn-danger"
                   onClick={canDelete ? this.props.deleteAccountConfirmation : null}
                   disabled={!canDelete}
                 >
                   {intl.formatMessage(messages['account.settings.delete.account.button'])}
                 </Button>
-              </p>
+              </div>
               {isVerifiedAccount ? null : (
                 <BeforeProceedingBanner
                   instructionMessageId={optInInstructionMessageId}
@@ -138,9 +131,9 @@ export class DeleteAccount extends React.Component {
               />
 
               <ConnectedSuccessModal status={status} onClose={this.handleFinalClose} />
-            </>
+            </div>
           ) : (
-            <p>{intl.formatMessage(messages['account.settings.cannot.delete.account.text'])}</p>
+            <p className="ac-delete-body">{intl.formatMessage(messages['account.settings.cannot.delete.account.text'])}</p>
           )
         }
 
