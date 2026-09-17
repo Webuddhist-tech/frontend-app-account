@@ -181,4 +181,17 @@ describe('EditableField', () => {
     renderComponent({ userSuppliedValue: 'extra' });
     expect(screen.getByText('john_doe: extra')).toBeInTheDocument();
   });
+
+  it('renders social link URLs as external hyperlinks', () => {
+    renderComponent({
+      name: 'social_link_twitter',
+      label: 'X (Twitter)',
+      value: 'https://x.com/TeamMessi',
+    });
+    const link = screen.getByRole('link');
+    expect(link).toHaveAttribute('href', 'https://x.com/TeamMessi');
+    expect(link).toHaveTextContent('https://x.com/TeamMessi');
+    expect(link).toHaveAttribute('target', '_blank');
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+  });
 });
