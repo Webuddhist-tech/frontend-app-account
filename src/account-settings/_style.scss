@@ -1,50 +1,64 @@
-.page__account-settings {
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  h6, .h6 {
-    margin-bottom: .25rem;
-  }
-
-  .btn-link {
-    line-height: 1.2;
-    border: none;
-    padding: 0;
-    display: inline-block;
-  }
-
-  .jump-nav-sm {
-    top: 1rem;
-  }
-
-  .jump-nav {
-
-    li {
-      margin-bottom: .5rem;
-
-      a {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  .custom-switch {
-    padding: 0;
-    max-width: 500px;
-
-    .custom-control-label {
-      left: 2.25rem;
-      line-height: 1.6rem;
-    }
-  }
-  .grayed-out{
-    opacity: 0.6; /* Real browsers */
-    filter: alpha(opacity = 60); /* MSIE */
-  }
-}
-
 #tooltip-email .small {
   display: block;
   margin: 0 !important;
+}
+
+// Row dividers — keep in sync with brand-openedx/paragon/_account.scss.
+// Duplicated here because @edx/brand SCSS is extracted in dev and does not
+// hot-reload on save; this file uses style-loader and updates on refresh.
+.page__account-settings.ac-wrap {
+  max-width: 75rem !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+
+  @media (min-width: 1600px) {
+    max-width: 90rem !important;
+  }
+
+  @media (min-width: 2000px) {
+    max-width: 97.5rem !important;
+  }
+
+  @media (max-width: 900px) {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  @media (max-width: 600px) {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .ac-row {
+    border-top: 1px solid #F0E4CC;
+  }
+
+  .ac-card-head + .ac-row,
+  .ac-card-head + .pgn-transition-replace-group .ac-row,
+  .ac-card-head + .form-group.ac-row {
+    border-top: none;
+  }
+
+  // Hyperlinks in field values — keep in sync with brand-openedx/paragon/_account.scss.
+  .ac-value .pgn__hyperlink {
+    color: #5A2D0C;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 150ms ease-out;
+
+    &:hover {
+      color: #1C0A00;
+      text-decoration: none;
+    }
+
+    &:active {
+      color: #1C0A00;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #1C0A00;
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+  }
 }
