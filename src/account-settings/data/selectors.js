@@ -1,6 +1,9 @@
 import { createSelector, createStructuredSelector } from 'reselect';
+import { selectShowPreferences } from '../../notification-preferences/data/selectors';
 import { siteLanguageListSelector, siteLanguageOptionsSelector } from '../site-language';
 import { compareVerifiedNamesByCreatedDate } from '../../utils';
+
+const showPreferencesSelector = selectShowPreferences();
 
 export const storeName = 'accountSettings';
 
@@ -243,6 +246,7 @@ export const accountSettingsPageSelector = createSelector(
   mostRecentVerifiedNameSelector,
   sortedVerifiedNameHistorySelector,
   countriesSelector,
+  showPreferencesSelector,
   (
     accountSettings,
     siteLanguageOptions,
@@ -261,6 +265,7 @@ export const accountSettingsPageSelector = createSelector(
     mostRecentVerifiedName,
     verifiedNameHistory,
     countriesCodesList,
+    showPreferences,
   ) => ({
     siteLanguageOptions,
     siteLanguage,
@@ -282,6 +287,7 @@ export const accountSettingsPageSelector = createSelector(
     mostRecentVerifiedName,
     verifiedNameHistory,
     countriesCodesList,
+    showPreferences,
   }),
 );
 
