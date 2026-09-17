@@ -91,14 +91,15 @@ describe('EditableField', () => {
     expect(screen.getByRole('button', { name: /Edit/i })).toBeInTheDocument();
   });
 
-  it('renders empty label with edit button if no value and editable', () => {
+  it('renders empty label with add button if no value and editable', () => {
     renderComponent({ value: '', emptyLabel: 'Add value' });
-    expect(screen.getByRole('button', { name: 'Add value' })).toBeInTheDocument();
+    expect(screen.getByText('Add value')).toHaveClass('ac-empty');
+    expect(screen.getByRole('button', { name: /Add/i })).toBeInTheDocument();
   });
 
-  it('renders empty label as muted text if not editable', () => {
+  it('renders empty label with ac-empty class if not editable', () => {
     renderComponent({ value: '', emptyLabel: 'No value', isEditable: false });
-    expect(screen.getByText('No value')).toHaveClass('text-muted');
+    expect(screen.getByText('No value')).toHaveClass('ac-empty');
   });
 
   it('renders editing state with form controls', async () => {
