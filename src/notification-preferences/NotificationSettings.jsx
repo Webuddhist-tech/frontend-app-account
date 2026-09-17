@@ -16,28 +16,31 @@ const NotificationSettings = () => {
 
   return (
     showPreferences && (
-      <Container className="notification-preferences px-0">
-        <h2 className="notification-heading mb-3">
-          {intl.formatMessage(messages.notificationHeading)}
-        </h2>
-        <div className="text-gray-700 font-size-14 mb-3">
-          {intl.formatMessage(messages.notificationCadenceDescription, {
-            dailyTime: '22:00 UTC', weeklyTime: '22:00 UTC',
-          })}
+      <Container className="notification-preferences ac-card px-0">
+        <div className="ac-card-head">
+          <h2 className="notification-heading ac-h2">
+            {intl.formatMessage(messages.notificationHeading)}
+          </h2>
+          <div className="ac-card-note">
+            {intl.formatMessage(messages.notificationCadenceDescription, {
+              dailyTime: '22:00 UTC', weeklyTime: '22:00 UTC',
+            })}
+          </div>
+          <div className="ac-card-note">
+            {intl.formatMessage(messages.notificationPreferenceGuideBody)}
+            <Hyperlink
+              destination="https://edx.readthedocs.io/projects/open-edx-learner-guide/en/latest/sfd_notifications/index.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1"
+            >
+              {intl.formatMessage(messages.notificationPreferenceGuideLink)}
+            </Hyperlink>
+          </div>
         </div>
-        <div className="mb-5 text-gray-700 font-size-14">
-          {intl.formatMessage(messages.notificationPreferenceGuideBody)}
-          <Hyperlink
-            destination="https://edx.readthedocs.io/projects/open-edx-learner-guide/en/latest/sfd_notifications/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-decoration-underline ml-1"
-          >
-            {intl.formatMessage(messages.notificationPreferenceGuideLink)}
-          </Hyperlink>
+        <div className="ac-notification-body">
+          <NotificationPreferences />
         </div>
-        <NotificationPreferences />
-        <div className="border border-light-700 my-6" />
       </Container>
     )
   );
