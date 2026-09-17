@@ -4,6 +4,8 @@ import { useIntl } from '@edx/frontend-platform/i18n';
 import { breakpoints, useWindowSize } from '@openedx/paragon';
 import classNames from 'classnames';
 import { NavHashLink } from 'react-router-hash-link';
+import { useSelector } from 'react-redux';
+import { selectShowPreferences } from '../notification-preferences/data/selectors';
 import jumpNavIcons from './JumpNavIcons';
 import messages from './AccountSettingsPage.messages';
 
@@ -14,6 +16,7 @@ const JumpNav = () => {
   const intl = useIntl();
   const { width: windowWidth } = useWindowSize();
   const stickToTop = windowWidth > breakpoints.small.minWidth;
+  const showNotifications = useSelector(selectShowPreferences());
   const enableAccountDeletion = getConfig().ENABLE_ACCOUNT_DELETION;
   const links = [
     {
@@ -28,10 +31,10 @@ const JumpNav = () => {
       id: 'social-media',
       label: intl.formatMessage(messages['account.settings.section.social.media']),
     },
-    {
+    ...(showNotifications ? [{
       id: 'notifications',
       label: intl.formatMessage(messages['notification.preferences.notifications.label']),
-    },
+    }] : []),
     {
       id: 'site-preferences',
       label: intl.formatMessage(messages['account.settings.section.site.preferences']),
@@ -53,7 +56,7 @@ const JumpNav = () => {
   const sectionIds = useMemo(() => {
     const ids = links.map(({ id }) => id);
     return ids;
-  }, [enableAccountDeletion, intl.locale]);
+  }, [showNotifications, enableAccountDeletion, intl.locale]);
   const [activeId, setActiveId] = useState(() => sectionIds[0]);
 
   useEffect(() => {
