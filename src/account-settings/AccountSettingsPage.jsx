@@ -777,11 +777,9 @@ class AccountSettingsPage extends React.Component {
             {...editableFieldProps}
           />
         </section>
-        {this.props.showPreferences && (
-          <section className="account-section ac-notifications" id="notifications" ref={this.navLinkRefs['#notifications']}>
-            <NotificationSettings />
-          </section>
-        )}
+        <section className="account-section ac-notifications" id="notifications" ref={this.navLinkRefs['#notifications']}>
+          <NotificationSettings />
+        </section>
         <section className="account-section ac-card" id="site-preferences" ref={this.navLinkRefs['#site-preferences']}>
           <div className="ac-card-head">
             <h2 className="section-heading ac-h2">
@@ -893,7 +891,6 @@ AccountSettingsPage.propTypes = {
   loading: PropTypes.bool,
   loaded: PropTypes.bool,
   loadingError: PropTypes.string,
-  showPreferences: PropTypes.bool,
 
   // Form data
   formValues: PropTypes.shape({
@@ -999,7 +996,6 @@ AccountSettingsPage.defaultProps = {
   loading: false,
   loaded: false,
   loadingError: null,
-  showPreferences: false,
   committedValues: {
     useVerifiedNameForCerts: false,
     verified_name: null,
