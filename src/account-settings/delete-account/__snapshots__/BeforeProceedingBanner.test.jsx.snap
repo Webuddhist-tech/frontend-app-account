@@ -2,7 +2,7 @@
 
 exports[`BeforeProceedingBanner should match the snapshot if SUPPORT_URL_TO_UNLINK_SOCIAL_MEDIA_ACCOUNT does not have a support link 1`] = `
 <div
-  className="alert d-flex align-items-start alert-warning mt-n2"
+  className="alert d-flex align-items-start alert-warning"
 >
   <div>
     <svg
@@ -31,7 +31,7 @@ exports[`BeforeProceedingBanner should match the snapshot if SUPPORT_URL_TO_UNLI
 
 exports[`BeforeProceedingBanner should match the snapshot when SUPPORT_URL_TO_UNLINK_SOCIAL_MEDIA_ACCOUNT has a support link 1`] = `
 <div
-  className="alert d-flex align-items-start alert-warning mt-n2"
+  className="alert d-flex align-items-start alert-warning"
 >
   <div>
     <svg

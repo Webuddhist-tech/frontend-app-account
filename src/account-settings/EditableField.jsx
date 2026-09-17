@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import {
-  Button, Form, StatefulButton,
+  Button, Form, StatefulButton, Hyperlink,
 } from '@openedx/paragon';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import LockIcon from './icons/LockIcon';
 
 import SwitchContent from './SwitchContent';
 import messages from './AccountSettingsPage.messages';
+import FieldActionButton from './FieldActionButton';
 
 import {
   openForm,
@@ -17,6 +17,8 @@ import {
 } from './data/actions';
 import { editableFieldSelector } from './data/selectors';
 import CertificatePreference from './certificate-preference/CertificatePreference';
+
+const HTTP_URL_PATTERN = /^https?:\/\//i;
 
 const EditableField = (props) => {
   const {
@@ -60,12 +62,14 @@ const EditableField = (props) => {
     onCancel(name);
   };
 
-  const renderEmptyLabel = () => {
-    if (isEditable) {
-      return <Button variant="link" onClick={handleEdit} className="p-0">{emptyLabel}</Button>;
-    }
-    return <span className="text-muted">{emptyLabel}</span>;
-  };
+  const actionLabelMessageKey = value
+    ? 'account.settings.editable.field.action.edit'
+    : 'account.settings.editable.field.action.add';
+  const actionVariant = value ? 'edit' : 'add';
+
+  const renderEmptyLabel = () => (
+    <span className="ac-empty">{emptyLabel}</span>
+  );
 
   const renderValue = (rawValue) => {
     if (!rawValue) {
@@ -75,6 +79,19 @@ const EditableField = (props) => {
 
     if (userSuppliedValue) {
       finalValue += `: ${userSuppliedValue}`;
+    }
+
+    if (name.startsWith('social_link_') && HTTP_URL_PATTERN.test(String(rawValue))) {
+      return (
+        <Hyperlink
+          destination={rawValue}
+          target="_blank"
+          rel="noopener noreferrer"
+          showLaunchIcon={false}
+        >
+          {finalValue}
+        </Hyperlink>
+      );
     }
 
     return finalValue;
@@ -98,13 +115,13 @@ const EditableField = (props) => {
       expression={isEditing ? 'editing' : 'default'}
       cases={{
         editing: (
-          <>
-            <form onSubmit={handleSubmit} data-testid="editable-field-form">
+          <div className="ac-row ac-row-editing">
+            <form className="ac-row-body ac-form" onSubmit={handleSubmit} data-testid="editable-field-form">
               <Form.Group
                 controlId={id}
                 isInvalid={error != null}
               >
-                <Form.Label size="sm" className="h6 d-block" htmlFor={id}>{label}</Form.Label>
+                <Form.Label size="sm" className="ac-label d-block" htmlFor={id}>{label}</Form.Label>
                 <Form.Control
                   data-hj-suppress
                   name={name}
@@ -119,7 +136,7 @@ const EditableField = (props) => {
                 {error != null && <Form.Control.Feedback hasIcon={false} data-testid="editable-field-error">{error}</Form.Control.Feedback>}
                 {others.children}
               </Form.Group>
-              <p>
+              <div className="ac-form-actions">
                 <StatefulButton
                   type="submit"
                   className="mr-2"
@@ -148,25 +165,37 @@ const EditableField = (props) => {
                 >
                   {intl.formatMessage(messages['account.settings.editable.field.action.cancel'])}
                 </Button>
-              </p>
+              </div>
             </form>
             {['name', 'verified_name'].includes(name) && (
               <CertificatePreference fieldName={name} data-testid="editable-field-certificate-preference" />
             )}
-          </>
+          </div>
         ),
         default: (
-          <div className="form-group">
-            <div className="d-flex align-items-start">
-              <h6 aria-level="3">{label}</h6>
+          <div className="form-group ac-row">
+            <div className="ac-row-body">
+              <h6 className="ac-label" aria-level="3">{label}</h6>
+              <p data-hj-suppress className={classNames('ac-value', { 'grayed-out': isGrayedOut, 'ac-empty': !value })}>{renderValue(value)}</p>
+              <p className="ac-help">{renderConfirmationMessage() || helpText}</p>
+            </div>
+            <div className="ac-row-action">
               {isEditable ? (
-                <Button variant="link" onClick={handleEdit} className="ml-3" data-testid="editable-field-edit" data-clicked="edit">
-                  <FontAwesomeIcon className="mr-1" icon={faPencilAlt} />{intl.formatMessage(messages['account.settings.editable.field.action.edit'])}
-                </Button>
+                <FieldActionButton
+                  label={intl.formatMessage(messages[actionLabelMessageKey])}
+                  onClick={handleEdit}
+                  testId="editable-field-edit"
+                  clicked={actionVariant}
+                  variant={actionVariant}
+                />
+              ) : null}
+              {!isEditable && name === 'username' ? (
+                <span className="ac-lock">
+                  <LockIcon />
+                  {intl.formatMessage(messages['account.settings.field.permanent'])}
+                </span>
               ) : null}
             </div>
-            <p data-hj-suppress className={classNames('text-truncate', { 'grayed-out': isGrayedOut })}>{renderValue(value)}</p>
-            <p className="small text-muted mt-n2">{renderConfirmationMessage() || helpText}</p>
           </div>
         ),
       }}

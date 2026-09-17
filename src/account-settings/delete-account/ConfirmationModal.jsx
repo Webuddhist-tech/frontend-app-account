@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getConfig } from '@edx/frontend-platform';
 import messages from './messages';
 import Alert from '../Alert';
-import PrintingInstructions from './PrintingInstructions';
 
 export class ConfirmationModal extends Component {
   /**
@@ -42,7 +41,7 @@ export class ConfirmationModal extends Component {
 
     return (
       <Alert
-        className="alert-danger mt-n2"
+        className="alert-danger ac-modal-error"
         icon={<FontAwesomeIcon className="mr-2" icon={faExclamationCircle} />}
       >
         <h6>{intl.formatMessage(messages[headerMessageId])}</h6>
@@ -79,43 +78,49 @@ export class ConfirmationModal extends Component {
         title={intl.formatMessage(messages['account.settings.delete.account.modal.header'])}
         onClose={onCancel}
         isOverflowVisible
+        className="ac-delete-modal"
         footerNode={(
-          <ActionRow>
-            <Button variant="link" onClick={onCancel}>Cancel</Button>
-            <Button variant="danger" onClick={onSubmit}>Yes, Delete</Button>
+          <ActionRow className="ac-modal-foot">
+            <Button variant="outline-primary" onClick={onCancel}>
+              {intl.formatMessage(messages['account.settings.delete.account.modal.confirm.cancel'])}
+            </Button>
+            <Button variant="danger" className="ac-btn-solid-danger" onClick={onSubmit}>
+              {intl.formatMessage(messages['account.settings.delete.account.modal.confirm.delete'])}
+            </Button>
           </ActionRow>
         )}
       >
-        <div className="p-3">
-          {this.renderError()}
-          <Alert
-            className="alert-warning mt-n2"
-            icon={<FontAwesomeIcon className="mr-2" icon={faExclamationTriangle} />}
-          >
-            <h6>
-              {intl.formatMessage(
-                messages['account.settings.delete.account.modal.text.1'],
-                { siteName: getConfig().SITE_NAME },
-              )}
-            </h6>
-            <p>
-              {intl.formatMessage(
-                messages[deleteAccountModalText2MessageKey],
-                { siteName: getConfig().SITE_NAME },
-              )}
-            </p>
-            <p>
-              <PrintingInstructions />
-            </p>
-          </Alert>
+        <div className="ac-modal-body">
+          {this.renderError(errorType)}
+          <div className="ac-modal-note">
+            <FontAwesomeIcon className="ac-modal-note-icon" icon={faExclamationTriangle} aria-hidden="true" />
+            <div>
+              <p>
+                {intl.formatMessage(
+                  messages['account.settings.delete.account.modal.text.1'],
+                  { siteName: getConfig().SITE_NAME },
+                )}
+              </p>
+              <p>
+                {intl.formatMessage(
+                  messages[deleteAccountModalText2MessageKey],
+                  { siteName: getConfig().SITE_NAME },
+                )}
+              </p>
+              <p>
+                {intl.formatMessage(messages['account.settings.delete.account.text.3'])}
+              </p>
+            </div>
+          </div>
           <Form.Group
             for={passwordFieldId}
             isInvalid={errorType !== null}
           >
-            <Form.Label className="d-block" htmlFor={passwordFieldId}>
+            <Form.Label className="ac-modal-ask d-block" htmlFor={passwordFieldId}>
               {intl.formatMessage(messages['account.settings.delete.account.modal.enter.password'])}
             </Form.Label>
             <Form.Control
+              className="ac-input"
               name="password"
               id={passwordFieldId}
               type="password"
