@@ -8,7 +8,7 @@ const messages = defineMessages({
   },
   'account.settings.delete.account.header': {
     id: 'account.settings.delete.account.header',
-    defaultMessage: 'Delete My Account',
+    defaultMessage: 'Delete my account',
     description: 'Header for the user account deletion area',
   },
   'account.settings.delete.account.subheader': {
@@ -31,6 +31,11 @@ const messages = defineMessages({
     defaultMessage: 'Once your account is deleted, you cannot use it to take courses on the edX app, edx.org, or any other site hosted by edX. This includes access to edx.org from your employer’s or university’s system and access to private sites offered by MIT Open Learning, Wharton Executive Education, and Harvard Medical School.',
     description: 'A message in the user account deletion area',
   },
+  'account.settings.delete.account.text.3': {
+    id: 'account.settings.delete.account.text.3',
+    defaultMessage: 'You may also lose access to verified certificates and other program credentials. You can make a copy of these for your records before proceeding with deletion.',
+    description: 'A message in the user account deletion area warning users that deleting their account will prevent them from accessing their certificates.',
+  },
   'account.settings.delete.account.text.3.link': {
     id: 'account.settings.delete.account.text.3.link',
     defaultMessage: 'Follow these instructions for printing or downloading a certificate',
@@ -48,7 +53,7 @@ const messages = defineMessages({
   },
   'account.settings.delete.account.button': {
     id: 'account.settings.delete.account.button',
-    defaultMessage: 'Delete My Account',
+    defaultMessage: 'Delete my account',
     description: 'Button label to permanently delete your platform account',
   },
   'account.settings.delete.account.please.activate': {
