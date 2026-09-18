@@ -54,11 +54,11 @@ export const SitePreferencesIcon = () => (
 );
 
 // svgrepo link-chain (3 segments: two hooks + center bar).
-// Wider viewBox than other nav icons so the chain reads the same visual weight at 16px.
 export const LinkedAccountsIcon = () => (
   <svg
     {...navIconProps}
     viewBox="-2 -2 28 28"
+    strokeWidth={2.2}
   >
     <path d="M10.57 5.8l2.71-2.72a5.4 5.4 0 0 1 7.64 7.64L18.2 13.43" />
     <path d="M5.8 10.57L3.08 13.28a5.4 5.4 0 0 0 7.64 7.64l2.71-2.72" />
